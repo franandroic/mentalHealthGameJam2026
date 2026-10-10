@@ -12,6 +12,10 @@ public class Fishing : MonoBehaviour
     public float fallingSpeed = 1;
     public float reelSpeed = 5;
 
+    [Header("Plummet pull")]
+    public float pullStrength = 2;
+    public float pullStopRadius = 1.5f;
+
     [Header("Free motion")]
     public float freeMoveSpeed = 8;
     public float freeMoveInertia = 0.3f;
@@ -137,8 +141,23 @@ public class Fishing : MonoBehaviour
 
     void UpdatePlummet()
     {
-        hookInstance.transform.position += Vector3.down * fallingSpeed * Time.deltaTime;
+        Vector3 pos = hookInstance.transform.position;
+        pos += Vector3.down * fallingSpeed * Time.deltaTime;
+        pos.x += PullTowardCursor(pos.x);
+        hookInstance.transform.position = pos;
         EnsureFishAhead();
+    }
+
+    float PullTowardCursor(float hookX)
+    {
+        float cursorX = cameraController.ClampToView(InputController.Instance.MouseWorldPosition).x;
+        float dx = cursorX - hookX;
+
+        float gap = Mathf.Abs(dx) - pullStopRadius;
+        if (gap <= 0) return 0;
+
+        float step = Mathf.Min(gap, gap * pullStrength * Time.deltaTime);
+        return Mathf.Sign(dx) * step;
     }
 
     void EnsureFishAhead()

@@ -299,10 +299,13 @@ MonoBehaviour:
   throwDuration: 1
   throwArcHeight: 2
   fallingSpeed: 1
-  reelSpeed: 5
-  freeMoveSpeed: 8
-  freeMoveInertia: 0.3
+  reelSpeed: 10
+  pullStrength: 0.2
+  pullStopRadius: 2
+  freeMoveSpeed: 4
+  freeMoveInertia: 0.2
   caughtDuration: 5
+  caughtFishOffset: {x: 0, y: 0}
   hook: {fileID: 4546290168174826837, guid: a95902ca349d01442816de6372664b71, type: 3}
   WaterSurface: {fileID: 1164906172}
   BoatPos: {fileID: 1221957993}
