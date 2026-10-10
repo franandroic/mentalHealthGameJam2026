@@ -21,10 +21,10 @@ public class Fishing : MonoBehaviour
     public float stayingAtLevelSpeed = 3;
     public float caughtDuration = 5;
     public float reeloutSpeed = 5;
-    [SerializedField] GameObject hook;
+    [SerializeField] GameObject hook;
 
-    [SerializedField] Transform WaterSurface;
-    [SerializedField] Transform BoatPos;
+    [SerializeField] Transform WaterSurface;
+    [SerializeField] Transform BoatPos;
 
 
     private void HandleState()
