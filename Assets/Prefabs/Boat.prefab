@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7023984366606575285}
   - component: {fileID: 5616564974743933328}
+  - component: {fileID: 3388936578410882812}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.0069, y: -0.2607, z: 100}
-  m_LocalScale: {x: 3.9097638, y: 2.141297, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8211878380963496011}
@@ -82,8 +83,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 59cd5993f631f8b47b8c953cd3c10ea1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,6 +94,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &3388936578410882812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2182138570586866161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 342e6440800cb894585f0dfa9f4570b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fishing
+  throwDuration: 1
+  throwArcHeight: 2
+  fallingSpeed: 1
+  reelSpeed: 10
+  pullStrength: 0.2
+  pullStopRadius: 2
+  freeMoveSpeed: 4
+  freeMoveInertia: 0.2
+  caughtDuration: 5
+  caughtFishOffset: {x: 0, y: 0}
+  lineWidth: 0.03
+  lineColor: {r: 1, g: 1, b: 1, a: 1}
+  lineSortingOrder: 10
+  fishingLine: {fileID: 0}
+  hook: {fileID: 4546290168174826837, guid: a95902ca349d01442816de6372664b71, type: 3}
+  WaterSurface: {fileID: 0}
+  BoatPos: {fileID: 7023984366606575285}
+  cameraController: {fileID: 0}
+  fishSpawner: {fileID: 0}
+  uiManager: {fileID: 0}
 --- !u!1 &6724804852427284685
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +151,7 @@ Transform:
   m_GameObject: {fileID: 6724804852427284685}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.5, z: 0}
+  m_LocalPosition: {x: 2.21, y: 1.79, z: 0}
   m_LocalScale: {x: 0.16874506, y: 0.30850866, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
