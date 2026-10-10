@@ -1577,7 +1577,7 @@ MonoBehaviour:
   - {fileID: 7557779224343373399, guid: eaa3d4c0e4a123047af461a8f6c777c1, type: 3}
   minFish: 5
   maxFish: 15
-  depth: 20
+  depth: 0
 --- !u!1 &1730337317
 GameObject:
   m_ObjectHideFlags: 0
