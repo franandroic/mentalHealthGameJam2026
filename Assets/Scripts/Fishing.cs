@@ -30,6 +30,7 @@ public class Fishing : MonoBehaviour
     [SerializeField] Transform BoatPos;
     [SerializeField] CameraController cameraController;
     [SerializeField] FishSpawner fishSpawner;
+    [SerializeField] UIAnimationManager uiManager;
 
     GameObject hookInstance;
     Vector3 throwStart;
@@ -43,12 +44,25 @@ public class Fishing : MonoBehaviour
     {
         ResetFilledBottomY();
         GameState.Instance.OnStateChanged += OnStateChanged;
+
+        if (uiManager == null)
+            uiManager = GameObject.Find("UIManager").GetComponent<UIAnimationManager>();
+        uiManager.OnScrollClosed += OnScrollClosed;
     }
 
     void OnDestroy()
     {
         if (GameState.Instance != null)
             GameState.Instance.OnStateChanged -= OnStateChanged;
+        if (uiManager != null)
+            uiManager.OnScrollClosed -= OnScrollClosed;
+    }
+
+    // The scroll shown after the reel was closed -> ready for the next cast
+    void OnScrollClosed()
+    {
+        if (GameState.Instance.Current == GameStateType.AfterReel)
+            GameState.Instance.SetState(GameStateType.BeforeCast);
     }
 
     // One-time setup when entering a state
@@ -69,6 +83,9 @@ public class Fishing : MonoBehaviour
             case GameStateType.FishCaught:
                 caughtTimer = 0;
                 HookFish(GameState.Instance.CaughtFish);
+                break;
+            case GameStateType.AfterReel:
+                EnterAfterReel();
                 break;
         }
     }
@@ -93,9 +110,7 @@ public class Fishing : MonoBehaviour
             case GameStateType.InReel:
                 UpdateReel();
                 break;
-            case GameStateType.AfterReel:
-                UpdateAfterReel();
-                break;
+            // AfterReel: nothing per frame, waits for the scroll to be closed
         }
     }
 
@@ -206,12 +221,13 @@ public class Fishing : MonoBehaviour
             GameState.Instance.SetState(GameStateType.AfterReel);
     }
 
-    void UpdateAfterReel()
+    // Runs once: clean up the hook and show the scroll. BeforeCast comes from OnScrollClosed.
+    void EnterAfterReel()
     {
         cameraController.SetTarget(null);
         Destroy(hookInstance);
         hookInstance = null;
         GameState.Instance.ClearCaughtFish();
-        GameState.Instance.SetState(GameStateType.BeforeCast);
+        uiManager.OpenScroll();
     }
 }

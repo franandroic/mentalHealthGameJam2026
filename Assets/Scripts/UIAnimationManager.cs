@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class UIAnimationManager : MonoBehaviour
@@ -7,6 +8,9 @@ public class UIAnimationManager : MonoBehaviour
     public bool isManager = false;
 
     private bool isOpen = false;
+
+    //Fired after the scroll has been closed.
+    public event Action OnScrollClosed;
 
     private void Awake()
     {
@@ -32,6 +36,7 @@ public class UIAnimationManager : MonoBehaviour
         animator.SetBool("Start", false);
         Scroll.SetActive(false);
         isOpen = false;
+        OnScrollClosed?.Invoke();
     }
 
 

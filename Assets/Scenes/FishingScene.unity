@@ -1420,6 +1420,7 @@ MonoBehaviour:
   BoatPos: {fileID: 1221957993}
   cameraController: {fileID: 223701972}
   fishSpawner: {fileID: 1527748248}
+  uiManager: {fileID: 0}
 --- !u!1 &1275960580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,8 +1722,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishSpawner
   fishVariants:
   - {fileID: 7557779224343373399, guid: eaa3d4c0e4a123047af461a8f6c777c1, type: 3}
-  minFish: 5
-  maxFish: 15
+  minFish: 1
+  maxFish: 1
   depth: 0
 --- !u!1 &1730337317
 GameObject:
@@ -1882,7 +1883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7023984366606575285, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7023984366606575285, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1911,6 +1912,10 @@ PrefabInstance:
     - target: {fileID: 7023984366606575285, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211878380963496011, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
