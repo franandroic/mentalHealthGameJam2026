@@ -25,6 +25,9 @@ public class GameState : MonoBehaviour
     //Stores the fish on the hook. Null if fish not caught.
     public GameObject CaughtFish { get; private set; }
 
+    //The emotion of the latest clue. Null until the first clue has been shown (first AfterReel)
+    public Emotion? CurrentClue { get; private set; }
+
     //Fired with the new state after every change.
     public event Action<GameStateType> OnStateChanged;
 
@@ -62,20 +65,49 @@ public class GameState : MonoBehaviour
 
     void ShowRandomClue()
     {
+        Emotion[] emotions = (Emotion[])Enum.GetValues(typeof(Emotion));
+        Emotion picked = emotions[UnityEngine.Random.Range(0, emotions.Length)];
+
+        CurrentClue = picked;
         if (clueText == null)
         {
             Debug.LogWarning("GameState: clueText is not assigned.", this);
             return;
         }
+        clueText.text = TextRepository.Clues.TextFor(picked);
+    }
 
-        string[] clues = TextRepository.Clues.All;
-        clueText.text = clues[UnityEngine.Random.Range(0, clues.Length)];
+    // Looks up the caught fish's score for the current clue and logs it.
+    void LogCaughtFishScore(GameObject fish)
+    {
+        FishVariant variant = fish.GetComponentInParent<FishVariant>();
+        if (variant == null)
+        {
+            Debug.LogWarning("GameState: caught fish has no FishVariant, can't score it.", fish);
+            return;
+        }
+
+        if (!FishDatabase.TryGetByVariantName(variant.VariantName, out FishData data))
+        {
+            Debug.LogWarning("GameState: no FishDatabase entry for '" + variant.VariantName + "'.", fish);
+            return;
+        }
+
+        if (CurrentClue == null)
+        {
+            Debug.Log("Caught " + variant.VariantName + ", but there is no clue yet so it isn't scored.");
+            return;
+        }
+
+        Emotion clue = CurrentClue.Value;
+        Debug.Log("Caught " + variant.VariantName + ": " + clue + " score = " + data.GetScore(clue));
     }
 
     public void CatchFish(GameObject fish)
     {
         if (Current != GameStateType.InFreeMotion || fish == null) return;
         CaughtFish = fish;
+        LogCaughtFishScore(fish);
         SetState(GameStateType.FishCaught);
     }
 

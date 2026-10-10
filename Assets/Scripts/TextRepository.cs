@@ -12,7 +12,18 @@ public static class TextRepository
         public const string Happiness = "Trust in joy. Auspicious.";
         public const string Sadness = "Water beneath the willow. The stream of tears cradles a weary heart.";
 
-        public static readonly string[] All = { Anger, Disgust, Fear, Happiness, Sadness };
+        public static string TextFor(Emotion emotion)
+        {
+            switch (emotion)
+            {
+                case Emotion.Anger: return Anger;
+                case Emotion.Disgust: return Disgust;
+                case Emotion.Fear: return Fear;
+                case Emotion.Happiness: return Happiness;
+                case Emotion.Sadness: return Sadness;
+                default: return string.Empty;
+            }
+        }
     }
 
     // ---------- FEEDBACK ----------
