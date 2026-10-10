@@ -24,6 +24,12 @@ public class Fishing : MonoBehaviour
     public float caughtDuration = 5;
     public Vector2 caughtFishOffset;
 
+    [Header("Fishing line")]
+    public float lineWidth = 0.03f;
+    public Color lineColor = Color.white;
+    public int lineSortingOrder = 10;
+    [SerializeField] LineRenderer fishingLine;   // optional, created automatically if empty
+
     [Header("References")]
     [SerializeField] GameObject hook;
     [SerializeField] Transform WaterSurface;
@@ -43,6 +49,7 @@ public class Fishing : MonoBehaviour
     void Start()
     {
         ResetFilledBottomY();
+        SetupFishingLine();
         GameState.Instance.OnStateChanged += OnStateChanged;
 
         if (uiManager == null)
@@ -112,6 +119,40 @@ public class Fishing : MonoBehaviour
                 break;
             // AfterReel: nothing per frame, waits for the scroll to be closed
         }
+    }
+
+    // After all movement this frame, stretch the line from the cast point to the hook
+    void LateUpdate()
+    {
+        bool hasHook = hookInstance != null;
+        fishingLine.enabled = hasHook;
+        if (!hasHook) return;
+
+        fishingLine.SetPosition(0, BoatPos.position);
+        fishingLine.SetPosition(1, hookInstance.transform.position);
+    }
+
+    void SetupFishingLine()
+    {
+        if (fishingLine == null)
+        {
+            // separate child object - this GameObject (Boat) already has a SpriteRenderer, and Unity allows only one renderer per object
+            GameObject lineObject = new GameObject("FishingLine");
+            lineObject.transform.SetParent(transform, false);
+            fishingLine = lineObject.AddComponent<LineRenderer>();
+            Shader shader = Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default");
+            if (shader == null) shader = Shader.Find("Sprites/Default");
+            fishingLine.material = new Material(shader);
+            fishingLine.startColor = lineColor;
+            fishingLine.endColor = lineColor;
+            fishingLine.startWidth = lineWidth;
+            fishingLine.endWidth = lineWidth;
+            fishingLine.sortingOrder = lineSortingOrder;
+        }
+
+        fishingLine.positionCount = 2;
+        fishingLine.useWorldSpace = true;
+        fishingLine.enabled = false;
     }
 
     void StartCast()
