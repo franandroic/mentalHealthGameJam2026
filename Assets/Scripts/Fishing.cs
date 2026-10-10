@@ -12,19 +12,32 @@ public class Fishing : MonoBehaviour
     public float fallingSpeed = 1;
     public float reelSpeed = 5;
 
+    [Header("Free motion")]
+    public float freeMoveSpeed = 8;
+    public float freeMoveInertia = 0.3f;
+
+    [Header("Fish")]
+    public float caughtDuration = 5;
+    public Vector2 caughtFishOffset;
+
     [Header("References")]
     [SerializeField] GameObject hook;
     [SerializeField] Transform WaterSurface;
     [SerializeField] Transform BoatPos;
     [SerializeField] CameraController cameraController;
+    [SerializeField] FishSpawner fishSpawner;
 
     GameObject hookInstance;
     Vector3 throwStart;
     Vector3 throwTarget;
     float throwTimer;
+    float filledBottomY;
+    Vector3 freeMoveVelocity;
+    float caughtTimer;
 
     void Start()
     {
+        ResetFilledBottomY();
         GameState.Instance.OnStateChanged += OnStateChanged;
     }
 
@@ -37,8 +50,23 @@ public class Fishing : MonoBehaviour
     // One-time setup when entering a state
     void OnStateChanged(GameStateType state)
     {
-        if (state == GameStateType.InCast)
-            StartCast();
+        switch (GameState.Instance.Current)
+        {
+            case GameStateType.BeforeCast:
+                fishSpawner.ClearFish();
+                ResetFilledBottomY();
+                break;
+            case GameStateType.InCast:
+                StartCast();
+                break;
+            case GameStateType.InFreeMotion:
+                freeMoveVelocity = Vector3.zero;
+                break;
+            case GameStateType.FishCaught:
+                caughtTimer = 0;
+                HookFish(GameState.Instance.CaughtFish);
+                break;
+        }
     }
 
     // Per-frame work while in a state
@@ -51,6 +79,12 @@ public class Fishing : MonoBehaviour
                 break;
             case GameStateType.InPlummet:
                 UpdatePlummet();
+                break;
+            case GameStateType.InFreeMotion:
+                UpdateFreeMotion();
+                break;
+            case GameStateType.FishCaught:
+                UpdateFishCaught();
                 break;
             case GameStateType.InReel:
                 UpdateReel();
@@ -72,6 +106,21 @@ public class Fishing : MonoBehaviour
         cameraController.SetTarget(hookInstance.transform);
     }
 
+    void HookFish(GameObject fish)
+    {
+        FishBehaviour behaviour = fish.GetComponent<FishBehaviour>();
+        if (behaviour != null) behaviour.enabled = false;   // its Update was moving the fish every frame
+
+        Vector3 hookPos = hookInstance.transform.position;
+        fish.transform.position = new Vector3(hookPos.x + caughtFishOffset.x, hookPos.y + caughtFishOffset.y, fish.transform.position.z);
+        fish.transform.SetParent(hookInstance.transform, true);
+    }
+
+    void ResetFilledBottomY()
+    {
+        filledBottomY = WaterSurface.position.y;
+    }
+
     void UpdateCast()
     {
         throwTimer += Time.deltaTime;
@@ -89,6 +138,45 @@ public class Fishing : MonoBehaviour
     void UpdatePlummet()
     {
         hookInstance.transform.position += Vector3.down * fallingSpeed * Time.deltaTime;
+        EnsureFishAhead();
+    }
+
+    void EnsureFishAhead()
+    {
+        Vector2 view = cameraController.ViewSize;
+        if (view.y <= 0) return;
+
+        Vector3 camPos = cameraController.transform.position;
+        float camBottom = camPos.y - view.y / 2f;
+
+        while (filledBottomY > camBottom - view.y)
+        {
+            Vector3 center = new Vector3(camPos.x, filledBottomY - view.y / 2f, throwStart.z);
+            fishSpawner.SpawnFish(center, view);
+            filledBottomY -= view.y;
+        }
+    }
+
+    void UpdateFreeMotion()
+    {
+        Vector3 target = InputController.Instance.MouseWorldPosition;
+        target = cameraController.ClampToView(target);
+        target.y = Mathf.Min(target.y, WaterSurface.position.y);
+        target.z = hookInstance.transform.position.z;
+
+        hookInstance.transform.position = Vector3.SmoothDamp(
+            hookInstance.transform.position, target, ref freeMoveVelocity, freeMoveInertia, freeMoveSpeed
+            );
+    }
+
+    void UpdateFishCaught()
+    {
+        caughtTimer += Time.deltaTime;
+        if (caughtTimer < caughtDuration) return;
+
+        Destroy(GameState.Instance.CaughtFish);
+        GameState.Instance.ClearCaughtFish();
+        GameState.Instance.SetState(GameStateType.InFreeMotion);
     }
 
     void UpdateReel()
@@ -101,10 +189,10 @@ public class Fishing : MonoBehaviour
 
     void UpdateAfterReel()
     {
-        // Placeholder: clean up and allow another cast so the loop is testable.
         cameraController.SetTarget(null);
         Destroy(hookInstance);
         hookInstance = null;
+        GameState.Instance.ClearCaughtFish();
         GameState.Instance.SetState(GameStateType.BeforeCast);
     }
 }

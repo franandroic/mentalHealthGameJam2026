@@ -490,6 +490,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6966791530507230290}
   - component: {fileID: 7813913499636163199}
+  - component: {fileID: -3349813231271269722}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -507,8 +508,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4838885558534672189}
   m_Father: {fileID: 0}
@@ -525,6 +526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5588f386b7a34245bb87033fbf7e09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishBehaviour
+  distanceTargetError: 0.05
   Visuals: {fileID: 4398714538960057529}
   CalmSwimPattern: {fileID: 4467447805192059287}
   ChaoticSwimPattern: {fileID: 4315150621708247356}
@@ -533,6 +535,52 @@ MonoBehaviour:
   swimPattern: 0
   turnsAroundRandomly: 0
   speed: 3
+--- !u!61 &-3349813231271269722
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7557779224343373399}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.00000047683716, y: 0.008738577}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 4.670124, y: 2.7651548}
+  m_EdgeRadius: 0
 --- !u!1 &7655616686428690180
 GameObject:
   m_ObjectHideFlags: 0
