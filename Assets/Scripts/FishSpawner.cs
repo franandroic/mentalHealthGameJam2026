@@ -1,19 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 //Spawns a random number of fish, each using a randomly chosen prefab variant.
 public class FishSpawner : MonoBehaviour
 {
+    private List<GameObject> spawnedFish = new List<GameObject>();
+
     [Header("Prefabs")]
     [SerializeField] private GameObject[] fishVariants;
 
-    [Header("Amount")]
     [SerializeField] private int minFish = 5;
     [SerializeField] private int maxFish = 15;
+    [SerializeField] private float depth = 0.0f;
 
-    [Header("Spawn Area (box centered on this object)")]
-    [SerializeField] private Vector3 areaSize = new Vector3(20f, 10f, 20f);
-
-    public int SpawnFish(Vector3 areaCenter)
+    public int SpawnFish(Vector3 areaCenter, Vector2 areaSize)
     {
         if (fishVariants == null || fishVariants.Length == 0)
         {
@@ -31,14 +31,23 @@ public class FishSpawner : MonoBehaviour
             Vector3 position = areaCenter + new Vector3(
                 Random.Range(-areaSize.x / 2f, areaSize.x / 2f),
                 Random.Range(-areaSize.y / 2f, areaSize.y / 2f),
-                Random.Range(-areaSize.z / 2f, areaSize.z / 2f)
+                Random.Range(-depth / 2f, depth / 2f)
                 );
 
             Quaternion rotation = Quaternion.identity;
 
-            Instantiate(prefab, position, rotation);
+            spawnedFish.Add(Instantiate(prefab, position, rotation));
         }
 
         return count;
+    }
+
+    public void ClearFish()
+    {
+        foreach (GameObject fish in spawnedFish)
+        {
+            if (fish != null) Destroy(fish);
+        }
+        spawnedFish.Clear();
     }
 }

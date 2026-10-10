@@ -17,14 +17,17 @@ public class Fishing : MonoBehaviour
     [SerializeField] Transform WaterSurface;
     [SerializeField] Transform BoatPos;
     [SerializeField] CameraController cameraController;
+    [SerializeField] FishSpawner fishSpawner;
 
     GameObject hookInstance;
     Vector3 throwStart;
     Vector3 throwTarget;
     float throwTimer;
+    float filledBottomY;
 
     void Start()
     {
+        ResetFilledBottomY();
         GameState.Instance.OnStateChanged += OnStateChanged;
     }
 
@@ -37,8 +40,16 @@ public class Fishing : MonoBehaviour
     // One-time setup when entering a state
     void OnStateChanged(GameStateType state)
     {
-        if (state == GameStateType.InCast)
-            StartCast();
+        switch (GameState.Instance.Current)
+        {
+            case GameStateType.BeforeCast:
+                fishSpawner.ClearFish();
+                ResetFilledBottomY();
+                break;
+            case GameStateType.InCast:
+                StartCast();
+                break;
+        }
     }
 
     // Per-frame work while in a state
@@ -72,6 +83,11 @@ public class Fishing : MonoBehaviour
         cameraController.SetTarget(hookInstance.transform);
     }
 
+    void ResetFilledBottomY()
+    {
+        filledBottomY = WaterSurface.position.y;
+    }
+
     void UpdateCast()
     {
         throwTimer += Time.deltaTime;
@@ -89,8 +105,23 @@ public class Fishing : MonoBehaviour
     void UpdatePlummet()
     {
         hookInstance.transform.position += Vector3.down * fallingSpeed * Time.deltaTime;
+        EnsureFishAhead();
+    }
 
+    void EnsureFishAhead()
+    {
+        Vector2 view = cameraController.ViewSize;
+        if (view.y <= 0) return;
 
+        Vector3 camPos = cameraController.transform.position;
+        float camBottom = camPos.y - view.y / 2f;
+
+        while (filledBottomY > camBottom - view.y)
+        {
+            Vector3 center = new Vector3(camPos.x, filledBottomY - view.y / 2f, throwStart.z);
+            fishSpawner.SpawnFish(center, view);
+            filledBottomY -= view.y;
+        }
     }
 
     void UpdateReel()

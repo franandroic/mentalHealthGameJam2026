@@ -304,6 +304,7 @@ MonoBehaviour:
   WaterSurface: {fileID: 1164906172}
   BoatPos: {fileID: 1221957993}
   cameraController: {fileID: 223701972}
+  fishSpawner: {fileID: 1527748248}
 --- !u!1 &1527748244
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +316,7 @@ GameObject:
   - component: {fileID: 1527748247}
   - component: {fileID: 1527748246}
   - component: {fileID: 1527748245}
+  - component: {fileID: 1527748248}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -362,6 +364,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1527748248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527748244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a099a9fc11d3c419e887661efd5858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishSpawner
+  fishVariants:
+  - {fileID: 7557779224343373399, guid: eaa3d4c0e4a123047af461a8f6c777c1, type: 3}
+  minFish: 5
+  maxFish: 15
+  depth: 0
 --- !u!1001 &1198101314564021913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -441,7 +460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7023984366606575285, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7023984366606575285, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
       propertyPath: m_LocalRotation.w
