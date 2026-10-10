@@ -89,6 +89,8 @@ public class Fishing : MonoBehaviour
     void UpdatePlummet()
     {
         hookInstance.transform.position += Vector3.down * fallingSpeed * Time.deltaTime;
+
+
     }
 
     void UpdateReel()

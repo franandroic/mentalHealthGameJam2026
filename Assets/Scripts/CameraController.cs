@@ -9,9 +9,20 @@ public class CameraController : MonoBehaviour
     bool following;
     float offsetY;
     float startY;
+    Camera cam;
+
+    public Vector2 ViewSize
+    {
+        get
+        {
+            float height = cam.orthographicSize * 2.0f;
+            return new Vector2(height * cam.aspect, height);
+        }
+    }
 
     void Awake()
     {
+        cam = GetComponent<Camera>();
         startY = transform.position.y;
     }
 
