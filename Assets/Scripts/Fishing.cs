@@ -1,224 +1,110 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+//Spawns the hook and moves it according to the current GameState.
+//Reports world events (hook hit the water, hook is back) to GameState.
 public class Fishing : MonoBehaviour
 {
-
-
-    public enum FishingPhase
-    {
-        Throwing,
-        Falling,
-        StayingAtLevel,
-        Caught,
-        GoingBack
-    }
-
-    FishingPhase currentPhase;
-    public float fallingSpeed = 1;
-    public float stayingAtLevelSpeed = 3;
-    public float caughtDuration = 5;
-    public float reeloutSpeed = 5;
+    [Header("Cast")]
     public float throwDuration = 1;
     public float throwArcHeight = 2;
-    [SerializeField] GameObject hook;
 
+    [Header("Movement")]
+    public float fallingSpeed = 1;
+    public float reelSpeed = 5;
+
+    [Header("References")]
+    [SerializeField] GameObject hook;
     [SerializeField] Transform WaterSurface;
     [SerializeField] Transform BoatPos;
+    [SerializeField] CameraController cameraController;
 
     GameObject hookInstance;
-    Camera cam;
-    [Range(0f, 0.5f)] public float VerticalBuffer = 0.1f; // udio visine ekrana (0.1 = 10%)
-
-    // kosi hitac
-    bool isThrown;
     Vector3 throwStart;
     Vector3 throwTarget;
     float throwTimer;
 
-    float caughtTimer;
-
-
-    private void HandleState()
+    void Start()
     {
-        switch (currentPhase)
+        GameState.Instance.OnStateChanged += OnStateChanged;
+    }
+
+    void OnDestroy()
+    {
+        if (GameState.Instance != null)
+            GameState.Instance.OnStateChanged -= OnStateChanged;
+    }
+
+    // One-time setup when entering a state
+    void OnStateChanged(GameStateType state)
+    {
+        if (state == GameStateType.InCast)
+            StartCast();
+    }
+
+    // Per-frame work while in a state
+    void Update()
+    {
+        switch (GameState.Instance.Current)
         {
-            case FishingPhase.Throwing:
-                HandleThrowing();
+            case GameStateType.InCast:
+                UpdateCast();
                 break;
-            case FishingPhase.Falling:
-                HandleFalling();
+            case GameStateType.InPlummet:
+                UpdatePlummet();
                 break;
-            case FishingPhase.StayingAtLevel:
-                HandleStayingAtLevel();
+            case GameStateType.InReel:
+                UpdateReel();
                 break;
-            case FishingPhase.Caught:
-                HandleCaught();
-                break;
-            case FishingPhase.GoingBack:
-                HandleGoingBack();
+            case GameStateType.AfterReel:
+                UpdateAfterReel();
                 break;
         }
     }
 
-    private void HandleThrowing()
+    void StartCast()
     {
-        // ako je stisnut lijevi klik misa, instancirat gameobjekt hook i napraviti kosi hitac na nacin
-        // da landa na poziciju koja je odredjena x kordinatom trenutne pozicije misa.x i y kordinatom WaterSutface.position.y
-        // kada landa na povrsinu mora, prebacuje se u stanje Falling
+        throwStart = BoatPos.position;
+        Vector3 mouse = InputController.Instance.MouseWorldPosition;
+        throwTarget = new Vector3(mouse.x, WaterSurface.position.y, throwStart.z);
+        throwTimer = 0;
 
-        if (!isThrown)
-        {
-            if (!LeftClickPressed()) return;
+        hookInstance = Instantiate(hook, throwStart, Quaternion.identity);
+        cameraController.SetTarget(hookInstance.transform);
+    }
 
-            throwStart = BoatPos.position;
-            throwTarget = new Vector3(MouseWorldPosition().x, WaterSurface.position.y, throwStart.z);
-            throwTimer = 0;
-            hookInstance = Instantiate(hook, throwStart, Quaternion.identity);
-            isThrown = true;
-            return;
-        }
-
+    void UpdateCast()
+    {
         throwTimer += Time.deltaTime;
         float t = Mathf.Clamp01(throwTimer / throwDuration);
 
-        // jednolika brzina po x + parabola po y = kosi hitac koji tocno landa na throwTarget
+        // linear in x + parabola in y = projectile arc that lands exactly on throwTarget
         Vector3 position = Vector3.Lerp(throwStart, throwTarget, t);
         position.y += throwArcHeight * 4 * t * (1 - t);
         hookInstance.transform.position = position;
 
         if (t >= 1)
-        {
-            isThrown = false;
-            currentPhase = FishingPhase.Falling;
-            Debug.Log("Falling - press left click to stop");
-        }
+            GameState.Instance.SetState(GameStateType.InPlummet);
     }
 
-    private void HandleFalling()
+    void UpdatePlummet()
     {
-        // hook pada jednolikom brzinom fallingSpeed sve dok se ponovno ne stisne lijevi klik misa, zatim vise ne pada i prebacuje se u stanje stayingAtLevel
-
-        if (LeftClickPressed())
-        {
-            currentPhase = FishingPhase.StayingAtLevel;
-            Debug.Log("Staying at level - press left click to catch");
-            return;
-        }
-
         hookInstance.transform.position += Vector3.down * fallingSpeed * Time.deltaTime;
     }
 
-    private void HandleStayingAtLevel()
+    void UpdateReel()
     {
-        // hook se pomice za misem, lerpa brzinom stayingatlevelspeed sve dok se ne stisne lijevi klik misa, tada prelazi u stanje Caught
+        hookInstance.transform.position = Vector3.MoveTowards(hookInstance.transform.position, throwStart, reelSpeed * Time.deltaTime);
 
-        if (LeftClickPressed())
-        {
-            caughtTimer = 0;
-            currentPhase = FishingPhase.Caught;
-            Debug.Log("Caught - press left click within " + caughtDuration + "s to reel out");
-            return;
-        }
-
-        Vector3 target = MouseWorldPosition();
-        target.y = Mathf.Min(target.y, WaterSurface.position.y); // hook ostaje ispod povrsine mora
-        target.z = hookInstance.transform.position.z;
-
-        hookInstance.transform.position = Vector3.Lerp(hookInstance.transform.position, target, stayingAtLevelSpeed * Time.deltaTime);
+        if (hookInstance.transform.position == throwStart)
+            GameState.Instance.SetState(GameStateType.AfterReel);
     }
 
-    private void HandleCaught()
+    void UpdateAfterReel()
     {
-        // kada je uhvacen, hook zapocinje brojati 5 sekundi te ako se u medjuvremenu nista ne dogodi vraca se u stanje handlestayingatLevel, medjutim,
-        // ako igrac unutar tih 5 sekundi pritisne lijevi klik misa hook se krene pomicat prema boatu brzinom reeloutspeed te se vraca natrag u stanje throwing
-
-        if (LeftClickPressed())
-        {
-            currentPhase = FishingPhase.GoingBack;
-            Debug.Log("Reeling out");
-            return;
-        }
-
-        caughtTimer += Time.deltaTime;
-        if (caughtTimer >= caughtDuration)
-        {
-            currentPhase = FishingPhase.StayingAtLevel;
-            Debug.Log("Got away - staying at level");
-        }
+        // Placeholder: clean up and allow another cast so the loop is testable.
+        cameraController.SetTarget(null);
+        Destroy(hookInstance);
+        hookInstance = null;
+        GameState.Instance.SetState(GameStateType.BeforeCast);
     }
-
-    private void HandleGoingBack()
-    {
-        // hook se pomice prema boatu brzinom reeloutSpeed, kada stigne unistava se i vraca se u stanje Throwing
-
-        hookInstance.transform.position = Vector3.MoveTowards(hookInstance.transform.position, BoatPos.position, reeloutSpeed * Time.deltaTime);
-
-        if (hookInstance.transform.position == BoatPos.position)
-        {
-            Destroy(hookInstance);
-            hookInstance = null;
-            currentPhase = FishingPhase.Throwing;
-            Debug.Log("Press left click to throw");
-        }
-    }
-
-    private bool LeftClickPressed()
-    {
-        return Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
-    }
-
-    private Vector3 MouseWorldPosition()
-    {
-        Vector3 screenPos = Mouse.current.position.ReadValue();
-        screenPos.z = -cam.transform.position.z;
-        return cam.ScreenToWorldPoint(screenPos);
-    }
-
-    private void Start()
-    {
-        cam = Camera.main;
-        currentPhase = FishingPhase.Throwing;
-        Debug.Log("Press left click to throw");
-    }
-
-
-    private void Update()
-    {
-        HandleState();
-
-    }
-
-    private void LateUpdate()
-    {
-        // nakon sto se hook pomaknuo u Update, kamera ga prati
-        HandleCameraMovement();
-    }
-
-
-    private void HandleCameraMovement()
-    {
-        // trebas osigurati da jednom kada je hook spawnan ne smije biti bilo kojem gornjem ili donjem rubu ekrana blize od vertical
-        // buffer distance, ako je hook blize od toga, kamera se pomice gore ili dolje da bi hook bio unutar tog buffer distance-a
-
-        if (hookInstance == null) return;
-
-        Vector3 hookScreenPos = cam.WorldToScreenPoint(hookInstance.transform.position);
-        float buffer = VerticalBuffer * Screen.height;
-
-        // za koliko piksela je hook usao u buffer (negativno = donji rub, pozitivno = gornji rub)
-        float overshoot = 0;
-        if (hookScreenPos.y < buffer)
-            overshoot = hookScreenPos.y - buffer;
-        else if (hookScreenPos.y > Screen.height - buffer)
-            overshoot = hookScreenPos.y - (Screen.height - buffer);
-
-        if (overshoot == 0) return;
-
-        // pretvori pomak iz piksela u world jedinice i pomakni kameru samo po y
-        Vector3 allowedScreenPos = hookScreenPos - new Vector3(0, overshoot, 0);
-        float worldShift = cam.ScreenToWorldPoint(hookScreenPos).y - cam.ScreenToWorldPoint(allowedScreenPos).y;
-        cam.transform.position += new Vector3(0, worldShift, 0);
-    }
-
 }
