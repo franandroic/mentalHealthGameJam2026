@@ -300,6 +300,9 @@ MonoBehaviour:
   throwArcHeight: 2
   fallingSpeed: 1
   reelSpeed: 5
+  freeMoveSpeed: 8
+  freeMoveInertia: 0.3
+  caughtDuration: 5
   hook: {fileID: 4546290168174826837, guid: a95902ca349d01442816de6372664b71, type: 3}
   WaterSurface: {fileID: 1164906172}
   BoatPos: {fileID: 1221957993}
@@ -348,7 +351,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edce290c7ec900549b846a58b306d110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameState
-  skipFreeMotion: 0
 --- !u!4 &1527748247
 Transform:
   m_ObjectHideFlags: 0

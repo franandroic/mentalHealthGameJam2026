@@ -5,7 +5,6 @@ public class FishBehaviour : MonoBehaviour
 
     private Transform edgeRight;
     private Transform edgeLeft;
-
     private Transform edgeTop;
     private float distanceSideError = 0.2f;
     private float distanceTopError = 1f;
@@ -21,14 +20,14 @@ public class FishBehaviour : MonoBehaviour
     [SerializeField] GameObject ChaoticSwimPattern;
     [SerializeField] GameObject CustomSwimPattern;
     [SerializeField] GameObject BottomSwimPattern;
-    public enum SwimPatter
+    public enum SwimPattern
     {
         Calm,
         Chaotic,
         Custom
     }
 
-    public SwimPatter swimPattern;
+    public SwimPattern swimPattern;
     public bool turnsAroundRandomly = false;
     public float speed = 3;
 
@@ -69,8 +68,6 @@ public class FishBehaviour : MonoBehaviour
         }
 
         int randomnum = Random.Range(0, pattern.childCount);
-        Debug.Log(randomnum);
-        Debug.Log(pattern.GetChild(randomnum).name);
         Vector2 pointPos = pattern.GetChild(randomnum).position;
         destination = pointPos;
     }
@@ -80,13 +77,13 @@ public class FishBehaviour : MonoBehaviour
         GameObject pattern = null;
         switch (swimPattern)
         {
-            case SwimPatter.Calm:
+            case SwimPattern.Calm:
                 pattern = CalmSwimPattern;
                 break;
-            case SwimPatter.Chaotic:
+            case SwimPattern.Chaotic:
                 pattern = ChaoticSwimPattern;
                 break;
-            case SwimPatter.Custom:
+            case SwimPattern.Custom:
                 pattern = CustomSwimPattern;
                 break;
         }
@@ -106,7 +103,6 @@ public class FishBehaviour : MonoBehaviour
 
     private void SwimToBottom()
     {
-        Debug.Log("SwimToBottom");
         // riba je blizu povrsine -> nasumicno bira jednu od tocaka BottomSwimPatterna i pliva prema njoj
         if (BottomSwimPattern == null || BottomSwimPattern.transform.childCount == 0)
         {

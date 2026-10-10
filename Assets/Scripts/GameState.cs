@@ -18,11 +18,10 @@ public enum GameStateType
 public class GameState : MonoBehaviour
 {
     public static GameState Instance { get; private set; }
-
-    // Placeholder: until free motion is implemented, a click while plummeting goes straight to InReel.
-    [SerializeField] bool skipFreeMotion = true;
-
     public GameStateType Current { get; private set; } = GameStateType.BeforeCast;
+
+    //Stores the fish on the hook. Null if fish not caught.
+    public GameObject CaughtFish { get; private set; }
 
     //Fired with the new state after every change.
     public event Action<GameStateType> OnStateChanged;
@@ -53,8 +52,19 @@ public class GameState : MonoBehaviour
     {
         if (newState == Current) return;
         Current = newState;
-        Debug.Log("State -> " + newState);
         OnStateChanged?.Invoke(newState);
+    }
+
+    public void CatchFish(GameObject fish)
+    {
+        if (Current != GameStateType.InFreeMotion || fish == null) return;
+        CaughtFish = fish;
+        SetState(GameStateType.FishCaught);
+    }
+
+    public void ClearCaughtFish()
+    {
+        CaughtFish = null;
     }
 
     void HandleClick()
@@ -65,13 +75,14 @@ public class GameState : MonoBehaviour
                 SetState(GameStateType.InCast);
                 break;
             case GameStateType.InPlummet:
-                SetState(skipFreeMotion ? GameStateType.InReel : GameStateType.InFreeMotion);
+                SetState(GameStateType.InFreeMotion);
                 break;
             case GameStateType.InFreeMotion:
-                // TODO: FishCaught will go here once fish exist.
+                //Fallthrough with caught fish at null
+            case GameStateType.FishCaught:
                 SetState(GameStateType.InReel);
                 break;
-            // InCast, FishCaught, InReel, AfterReel: clicks are ignored.
+            // InCast, InReel, AfterReel: clicks are ignored.
         }
     }
 }
