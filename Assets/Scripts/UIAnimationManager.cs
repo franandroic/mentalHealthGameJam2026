@@ -39,10 +39,6 @@ public class UIAnimationManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && !isOpen)
-        {
-
-            OpenScroll();
-        }
+        // OpenScroll()
     }
 }

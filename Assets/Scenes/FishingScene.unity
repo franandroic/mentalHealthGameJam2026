@@ -941,8 +941,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8307ba6d4a15244da7be535708915b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIAnimationManager
-  Scroll: {fileID: 217202357}
-  scrollanimator: {fileID: 699590931}
+  animator: {fileID: 699590931}
+  isManager: 1
 --- !u!4 &650712052
 Transform:
   m_ObjectHideFlags: 0
@@ -1317,7 +1317,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1129807036}
-        m_TargetAssemblyTypeName: UIAnimationManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: AnimationScript, Assembly-CSharp
         m_MethodName: CloseScroll
         m_Mode: 1
         m_Arguments:
@@ -1375,11 +1375,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1129807031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8307ba6d4a15244da7be535708915b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 75a4a1f0491d92043995af0e40bab59e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIAnimationManager
-  Scroll: {fileID: 0}
-  scrollanimator: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationScript
 --- !u!4 &1164906172 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7919622008382117599, guid: 21ef50d2f6153fd4d8d0797ccc4a13b0, type: 3}
@@ -1414,11 +1412,12 @@ MonoBehaviour:
   freeMoveSpeed: 8
   freeMoveInertia: 0.3
   caughtDuration: 5
+  caughtFishOffset: {x: 0, y: 0}
   hook: {fileID: 4546290168174826837, guid: a95902ca349d01442816de6372664b71, type: 3}
   WaterSurface: {fileID: 1164906172}
   BoatPos: {fileID: 1221957993}
   cameraController: {fileID: 223701972}
-<<<<<<< HEAD
+  fishSpawner: {fileID: 1527748248}
 --- !u!1 &1275960580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,9 +1647,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476254262}
   m_CullTransparentMesh: 1
-=======
-  fishSpawner: {fileID: 1527748248}
->>>>>>> e1484d08a0250a5fca34a41b25b185f25e04db46
 --- !u!1 &1527748244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,7 +1705,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
+--- !u!114 &1527748248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527748244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a099a9fc11d3c419e887661efd5858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishSpawner
+  fishVariants:
+  - {fileID: 7557779224343373399, guid: eaa3d4c0e4a123047af461a8f6c777c1, type: 3}
+  minFish: 5
+  maxFish: 15
+  depth: 0
 --- !u!1 &1730337317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1729,15 +1741,11 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &1730337318
-=======
---- !u!114 &1527748248
->>>>>>> e1484d08a0250a5fca34a41b25b185f25e04db46
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
   m_GameObject: {fileID: 1730337317}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1793,19 +1801,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
-  m_GameObject: {fileID: 1527748244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52a099a9fc11d3c419e887661efd5858, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FishSpawner
-  fishVariants:
-  - {fileID: 7557779224343373399, guid: eaa3d4c0e4a123047af461a8f6c777c1, type: 3}
-  minFish: 5
-  maxFish: 15
-  depth: 0
->>>>>>> e1484d08a0250a5fca34a41b25b185f25e04db46
 --- !u!1001 &1198101314564021913
 PrefabInstance:
   m_ObjectHideFlags: 0
