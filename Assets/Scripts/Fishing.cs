@@ -28,6 +28,7 @@ public class Fishing : MonoBehaviour
 
     GameObject hookInstance;
     Camera cam;
+    [Range(0f, 0.5f)] public float VerticalBuffer = 0.1f; // udio visine ekrana (0.1 = 10%)
 
     // kosi hitac
     bool isThrown;
@@ -185,7 +186,39 @@ public class Fishing : MonoBehaviour
     private void Update()
     {
         HandleState();
+
     }
 
+    private void LateUpdate()
+    {
+        // nakon sto se hook pomaknuo u Update, kamera ga prati
+        HandleCameraMovement();
+    }
+
+
+    private void HandleCameraMovement()
+    {
+        // trebas osigurati da jednom kada je hook spawnan ne smije biti bilo kojem gornjem ili donjem rubu ekrana blize od vertical
+        // buffer distance, ako je hook blize od toga, kamera se pomice gore ili dolje da bi hook bio unutar tog buffer distance-a
+
+        if (hookInstance == null) return;
+
+        Vector3 hookScreenPos = cam.WorldToScreenPoint(hookInstance.transform.position);
+        float buffer = VerticalBuffer * Screen.height;
+
+        // za koliko piksela je hook usao u buffer (negativno = donji rub, pozitivno = gornji rub)
+        float overshoot = 0;
+        if (hookScreenPos.y < buffer)
+            overshoot = hookScreenPos.y - buffer;
+        else if (hookScreenPos.y > Screen.height - buffer)
+            overshoot = hookScreenPos.y - (Screen.height - buffer);
+
+        if (overshoot == 0) return;
+
+        // pretvori pomak iz piksela u world jedinice i pomakni kameru samo po y
+        Vector3 allowedScreenPos = hookScreenPos - new Vector3(0, overshoot, 0);
+        float worldShift = cam.ScreenToWorldPoint(hookScreenPos).y - cam.ScreenToWorldPoint(allowedScreenPos).y;
+        cam.transform.position += new Vector3(0, worldShift, 0);
+    }
 
 }
