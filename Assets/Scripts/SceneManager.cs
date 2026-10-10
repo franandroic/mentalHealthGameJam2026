@@ -16,4 +16,11 @@ public class SceneManager : MonoBehaviour
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(nextIndex);
     }
+
+    public void ReloadScene()
+    {
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+
 }
