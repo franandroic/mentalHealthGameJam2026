@@ -24,15 +24,15 @@ public readonly struct FishData
 //By variant name: FishDatabase.TryGetByVariantName("AnglerVariant", out FishData data)
 public static class FishDatabase
 {
-    public static readonly FishData AnglerFish = new FishData(
-        prefabVariantName: "AnglerVariant",
+    public static readonly FishData TestFish1 = new FishData(
+        prefabVariantName: "TestFish1",
         angerScore: 8,
         happinessScore: 2,
         scale: new Vector3(1.5f, 1.5f, 1.5f),
-        depth: 200f);
+        depth: 25f);
 
-    public static readonly FishData Clownfish = new FishData(
-        prefabVariantName: "ClownfishVariant",
+    public static readonly FishData TestFish2 = new FishData(
+        prefabVariantName: "TestFish2",
         angerScore: 2,
         happinessScore: 9,
         scale: new Vector3(0.5f, 0.5f, 0.5f),
@@ -41,8 +41,8 @@ public static class FishDatabase
     // Every entry, for looping/filtering. Add new fish here too.
     public static readonly IReadOnlyList<FishData> All = new[]
     {
-        AnglerFish,
-        Clownfish
+        TestFish1,
+        TestFish2
     };
 
     // Lookup table built once from All. Assumes one entry per variant name.

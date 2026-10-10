@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public enum GameStateType
@@ -19,6 +20,7 @@ public class GameState : MonoBehaviour
 {
     public static GameState Instance { get; private set; }
     public GameStateType Current { get; private set; } = GameStateType.BeforeCast;
+    [SerializeField] TMP_Text clueText;
 
     //Stores the fish on the hook. Null if fish not caught.
     public GameObject CaughtFish { get; private set; }
@@ -52,7 +54,22 @@ public class GameState : MonoBehaviour
     {
         if (newState == Current) return;
         Current = newState;
+
+        if (newState == GameStateType.AfterReel) ShowRandomClue();
+
         OnStateChanged?.Invoke(newState);
+    }
+
+    void ShowRandomClue()
+    {
+        if (clueText == null)
+        {
+            Debug.LogWarning("GameState: clueText is not assigned.", this);
+            return;
+        }
+
+        string[] clues = TextRepository.Clues.All;
+        clueText.text = clues[UnityEngine.Random.Range(0, clues.Length)];
     }
 
     public void CatchFish(GameObject fish)

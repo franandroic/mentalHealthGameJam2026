@@ -11,6 +11,8 @@ public static class TextRepository
         public const string Fear = "Judgement. It is wise to meet heaven's dark void with tremble and fear.";
         public const string Happiness = "Trust in joy. Auspicious.";
         public const string Sadness = "Water beneath the willow. The stream of tears cradles a weary heart.";
+
+        public static readonly string[] All = { Anger, Disgust, Fear, Happiness, Sadness };
     }
 
     // ---------- FEEDBACK ----------
@@ -21,6 +23,8 @@ public static class TextRepository
         public const string Medium = "Neither here nor there.";
         public const string QuiteRight = "Yeah, somewhat...";
         public const string SpotOn = "Correct!";
+
+        public static readonly string[] All = { VeryWrong, Wrong, Medium, QuiteRight, SpotOn };
     }
 
     // ---------- RESULTS ----------
@@ -31,5 +35,7 @@ public static class TextRepository
         public const string BestFear = "The fear GOAT!";
         public const string BestHappiness = "The happiness legend!";
         public const string BestSadness = "The sadness player!";
+
+        public static readonly string[] All = { BestAnger, BestDisgust, BestFear, BestHappiness, BestSadness };
     }
 }

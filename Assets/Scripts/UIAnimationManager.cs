@@ -6,7 +6,6 @@ public class UIAnimationManager : MonoBehaviour
     private GameObject Scroll;
     [SerializeField] Animator animator;
     public bool isManager = false;
-
     private bool isOpen = false;
 
     //Fired after the scroll has been closed.
@@ -29,21 +28,11 @@ public class UIAnimationManager : MonoBehaviour
         animator.SetBool("Start", true);
     }
 
-
-
     public void DisableScroll()
     {
         animator.SetBool("Start", false);
         Scroll.SetActive(false);
         isOpen = false;
         OnScrollClosed?.Invoke();
-    }
-
-
-
-
-    private void Update()
-    {
-        // OpenScroll()
     }
 }
