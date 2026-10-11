@@ -62,11 +62,16 @@ public class FishSpawner : MonoBehaviour
         float areaDepthTo = surfaceY - (areaCenter.y - areaSize.y / 2f);
 
         // Only variants whose depth band overlaps this area can spawn here.
+        // A weight of 0 or less means the variant never spawns.
         candidates.Clear();
+        float totalWeight = 0f;
         foreach (Variant v in variants)
         {
-            if (v.Data.MaxDepth >= areaDepthFrom && v.Data.MinDepth <= areaDepthTo)
+            if (v.Data.SpawnWeight > 0f && v.Data.MaxDepth >= areaDepthFrom && v.Data.MinDepth <= areaDepthTo)
+            {
                 candidates.Add(v);
+                totalWeight += v.Data.SpawnWeight;
+            }
         }
         if (candidates.Count == 0) return 0;
 
@@ -74,7 +79,10 @@ public class FishSpawner : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            Variant v = candidates[Random.Range(0, candidates.Count)];
+            // Stratified pick: fish i draws from its own 1/count slice of the total weight, so the mix in a batch
+            // stays close to the weights (weight 80 of 100 -> about 80% of the batch) instead of drifting randomly.
+            float t = (i + Random.value) / count;
+            Variant v = PickByWeight(t * totalWeight);
 
             // Pick the fish's depth inside the part of its band that falls in this area.
             float from = Mathf.Max(areaDepthFrom, v.Data.MinDepth);
@@ -98,6 +106,17 @@ public class FishSpawner : MonoBehaviour
         }
 
         return count;
+    }
+
+    private Variant PickByWeight(float target)
+    {
+        float cumulative = 0f;
+        foreach (Variant v in candidates)
+        {
+            cumulative += v.Data.SpawnWeight;
+            if (target < cumulative) return v;
+        }
+        return candidates[candidates.Count - 1];
     }
 
     // Destroys every fish spawned so far (skips ones that were already destroyed, e.g. caught).
