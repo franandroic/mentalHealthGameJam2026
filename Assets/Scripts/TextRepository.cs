@@ -68,11 +68,11 @@ public static class TextRepository
     // ---------- RESULTS ----------
     public static class Results
     {
-        public const string BestAnger = "Congrats! You’re the Expert in Anger.";
-        public const string BestDisgust = "Congrats! You’re the Lord of Sadness.";
-        public const string BestFear = "Congrats! You’re the Lord of Disgust.";
-        public const string BestHappiness = "Congrats! You’re the Expert in Joy.";
-        public const string BestSadness = "Congrats! You’re the Master of Fear.";
+        public const string BestAnger = "Congrats! You're the Expert in Anger.";
+        public const string BestDisgust = "Congrats! You're the Lord of Sadness.";
+        public const string BestFear = "Congrats! You're the Lord of Disgust.";
+        public const string BestHappiness = "Congrats! You're the Expert in Joy.";
+        public const string BestSadness = "Congrats! You're the Master of Fear.";
 
         public static readonly string[] All = { BestAnger, BestDisgust, BestFear, BestHappiness, BestSadness };
     }
