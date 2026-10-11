@@ -83,7 +83,7 @@ public static class FishDatabase
         sadnessScore: 1,
         scale: new Vector3(0.75f, 0.75f, 0.75f),
         depth: 7.5f,
-        depthRange: 5f,
+        depthRange: 15f,
         spawnWeight: 8
         );
 
@@ -96,7 +96,7 @@ public static class FishDatabase
         sadnessScore: 0,
         scale: new Vector3(1f, 1f, 1f),
         depth: 9f,
-        depthRange: 4f,
+        depthRange: 14f,
         spawnWeight: 5
         );
 
@@ -109,7 +109,7 @@ public static class FishDatabase
         sadnessScore: 0,
         scale: new Vector3(0.8f, 0.8f, 0.8f),
         depth: 27.5f,
-        depthRange: 4f,
+        depthRange: 14f,
         spawnWeight: 3
         );
 
@@ -122,7 +122,7 @@ public static class FishDatabase
         sadnessScore: 4,
         scale: new Vector3(0.75f, 0.75f, 0.75f),
         depth: 16f,
-        depthRange: 3f,
+        depthRange: 13f,
         spawnWeight: 3
         );
 
@@ -135,7 +135,7 @@ public static class FishDatabase
         sadnessScore: 1,
         scale: new Vector3(0.65f, 0.65f, 0.65f),
         depth: 21f,
-        depthRange: 5f,
+        depthRange: 15f,
         spawnWeight: 5
         );
 
@@ -148,7 +148,7 @@ public static class FishDatabase
         sadnessScore: 2,
         scale: new Vector3(1f, 1f, 1f),
         depth: 4f,
-        depthRange: 3f,
+        depthRange: 13f,
         spawnWeight: 8
         );
 
@@ -161,7 +161,7 @@ public static class FishDatabase
         sadnessScore: 0,
         scale: new Vector3(0.8f, 0.8f, 0.8f),
         depth: 26f,
-        depthRange: 3f,
+        depthRange: 13f,
         spawnWeight: 2
         );
 
@@ -174,7 +174,7 @@ public static class FishDatabase
         sadnessScore: 0,
         scale: new Vector3(0.55f, 0.55f, 0.55f),
         depth: 29f,
-        depthRange: 6f,
+        depthRange: 16f,
         spawnWeight: 5
         );
 
@@ -187,7 +187,7 @@ public static class FishDatabase
         sadnessScore: 3,
         scale: new Vector3(1f, 1f, 1f),
         depth: 31f,
-        depthRange: 3f,
+        depthRange: 13f,
         spawnWeight: 3
         );
 
@@ -200,7 +200,7 @@ public static class FishDatabase
         sadnessScore: 5,
         scale: new Vector3(1f, 1f, 1f),
         depth: 33.5f,
-        depthRange: 1.5f,
+        depthRange: 15f,
         spawnWeight: 2
         );
 
@@ -213,7 +213,7 @@ public static class FishDatabase
         sadnessScore: 2,
         scale: new Vector3(0.7f, 0.7f, 0.7f),
         depth: 14f,
-        depthRange: 4f,
+        depthRange: 14f,
         spawnWeight: 4
         );
 
@@ -226,7 +226,7 @@ public static class FishDatabase
         sadnessScore: 0,
         scale: new Vector3(0.7f, 0.7f, 0.7f),
         depth: 17f,
-        depthRange: 3f,
+        depthRange: 13f,
         spawnWeight: 2
         );
 
@@ -239,7 +239,7 @@ public static class FishDatabase
         sadnessScore: 0,
         scale: new Vector3(0.6f, 0.6f, 0.6f),
         depth: 22.5f,
-        depthRange: 5f,
+        depthRange: 15f,
         spawnWeight: 4
         );
 
@@ -252,7 +252,7 @@ public static class FishDatabase
         sadnessScore: 1,
         scale: new Vector3(0.55f, 0.55f, 0.55f),
         depth: 19f,
-        depthRange: 6f,
+        depthRange: 10f,
         spawnWeight: 8
         );
 
