@@ -68,7 +68,7 @@ public static class FishDatabase
         fearScore: 0,
         happinessScore: 1,
         sadnessScore: 0,
-        scale: new Vector3(1f, 1f, 1f),
+        scale: new Vector3(0.5f, 0.5f, 0.5f),
         depth: 17.5f,
         depthRange: 17.5f,
         spawnWeight: 100
@@ -81,7 +81,7 @@ public static class FishDatabase
         fearScore: 0,
         happinessScore: 2,
         sadnessScore: 1,
-        scale: new Vector3(1.5f, 1.5f, 1.5f),
+        scale: new Vector3(0.75f, 0.75f, 0.75f),
         depth: 7.5f,
         depthRange: 5f,
         spawnWeight: 8
@@ -94,7 +94,7 @@ public static class FishDatabase
         fearScore: 1,
         happinessScore: 0,
         sadnessScore: 0,
-        scale: new Vector3(2f, 2f, 2f),
+        scale: new Vector3(1f, 1f, 1f),
         depth: 9f,
         depthRange: 4f,
         spawnWeight: 5
@@ -107,7 +107,7 @@ public static class FishDatabase
         fearScore: 2,
         happinessScore: 0,
         sadnessScore: 0,
-        scale: new Vector3(1.6f, 1.6f, 1.6f),
+        scale: new Vector3(0.8f, 0.8f, 0.8f),
         depth: 27.5f,
         depthRange: 4f,
         spawnWeight: 3
@@ -120,7 +120,7 @@ public static class FishDatabase
         fearScore: 3,
         happinessScore: 0,
         sadnessScore: 4,
-        scale: new Vector3(1.5f, 1.5f, 1.5f),
+        scale: new Vector3(0.75f, 0.75f, 0.75f),
         depth: 16f,
         depthRange: 3f,
         spawnWeight: 3
@@ -133,7 +133,7 @@ public static class FishDatabase
         fearScore: 0,
         happinessScore: 3,
         sadnessScore: 1,
-        scale: new Vector3(1.3f, 1.3f, 1.3f),
+        scale: new Vector3(0.65f, 0.65f, 0.65f),
         depth: 21f,
         depthRange: 5f,
         spawnWeight: 5
@@ -146,7 +146,7 @@ public static class FishDatabase
         fearScore: 2,
         happinessScore: 0,
         sadnessScore: 2,
-        scale: new Vector3(2f, 2f, 2f),
+        scale: new Vector3(1f, 1f, 1f),
         depth: 4f,
         depthRange: 3f,
         spawnWeight: 8
@@ -159,7 +159,7 @@ public static class FishDatabase
         fearScore: 0,
         happinessScore: 5,
         sadnessScore: 0,
-        scale: new Vector3(1.6f, 1.6f, 1.6f),
+        scale: new Vector3(0.8f, 0.8f, 0.8f),
         depth: 26f,
         depthRange: 3f,
         spawnWeight: 2
@@ -172,7 +172,7 @@ public static class FishDatabase
         fearScore: 0,
         happinessScore: 1,
         sadnessScore: 0,
-        scale: new Vector3(1.1f, 1.1f, 1.1f),
+        scale: new Vector3(0.55f, 0.55f, 0.55f),
         depth: 29f,
         depthRange: 6f,
         spawnWeight: 5
@@ -185,7 +185,7 @@ public static class FishDatabase
         fearScore: 3,
         happinessScore: 0,
         sadnessScore: 3,
-        scale: new Vector3(2f, 2f, 2f),
+        scale: new Vector3(1f, 1f, 1f),
         depth: 31f,
         depthRange: 3f,
         spawnWeight: 3
@@ -198,7 +198,7 @@ public static class FishDatabase
         fearScore: 3,
         happinessScore: 0,
         sadnessScore: 5,
-        scale: new Vector3(2f, 2f, 2f),
+        scale: new Vector3(1f, 1f, 1f),
         depth: 33.5f,
         depthRange: 1.5f,
         spawnWeight: 2
@@ -211,7 +211,7 @@ public static class FishDatabase
         fearScore: 1,
         happinessScore: 0,
         sadnessScore: 2,
-        scale: new Vector3(1.4f, 1.4f, 1.4f),
+        scale: new Vector3(0.7f, 0.7f, 0.7f),
         depth: 14f,
         depthRange: 4f,
         spawnWeight: 4
@@ -224,7 +224,7 @@ public static class FishDatabase
         fearScore: 5,
         happinessScore: 0,
         sadnessScore: 0,
-        scale: new Vector3(1.4f, 1.4f, 1.4f),
+        scale: new Vector3(0.7f, 0.7f, 0.7f),
         depth: 17f,
         depthRange: 3f,
         spawnWeight: 2
@@ -237,7 +237,7 @@ public static class FishDatabase
         fearScore: 4,
         happinessScore: 0,
         sadnessScore: 0,
-        scale: new Vector3(1.2f, 1.2f, 1.2f),
+        scale: new Vector3(0.6f, 0.6f, 0.6f),
         depth: 22.5f,
         depthRange: 5f,
         spawnWeight: 4
@@ -250,7 +250,7 @@ public static class FishDatabase
         fearScore: 1,
         happinessScore: 0,
         sadnessScore: 1,
-        scale: new Vector3(1.1f, 1.1f, 1.1f),
+        scale: new Vector3(0.55f, 0.55f, 0.55f),
         depth: 19f,
         depthRange: 6f,
         spawnWeight: 8
@@ -263,7 +263,7 @@ public static class FishDatabase
         fearScore: 4,
         happinessScore: 0,
         sadnessScore: 2,
-        scale: new Vector3(2f, 2f, 2f),
+        scale: new Vector3(1f, 1f, 1f),
         depth: 32f,
         depthRange: 2.5f,
         spawnWeight: 2
@@ -276,7 +276,7 @@ public static class FishDatabase
         fearScore: 0,
         happinessScore: 4,
         sadnessScore: 2,
-        scale: new Vector3(5f, 5f, 5f),
+        scale: new Vector3(2.5f, 2.5f, 2.5f),
         depth: 10f,
         depthRange: 7.5f,
         spawnWeight: 1
@@ -289,7 +289,7 @@ public static class FishDatabase
         fearScore: 0,
         happinessScore: 4,
         sadnessScore: 0,
-        scale: new Vector3(1.5f, 1.5f, 1.5f),
+        scale: new Vector3(0.75f, 0.75f, 0.75f),
         depth: 11f,
         depthRange: 6f,
         spawnWeight: 5
