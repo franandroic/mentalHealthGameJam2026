@@ -35,7 +35,18 @@ public static class TextRepository
         public const string QuiteRight = "Yeah, somewhat...";
         public const string SpotOn = "Correct!";
 
-        public static readonly string[] All = { VeryWrong, Wrong, Medium, QuiteRight, SpotOn };
+        public static string ForScore(int score)
+        {
+            switch (score)
+            {
+                case 1: return VeryWrong;
+                case 2: return Wrong;
+                case 3: return Medium;
+                case 4: return QuiteRight;
+                case 5: return SpotOn;
+                default: return score < 1 ? VeryWrong : SpotOn;
+            }
+        }
     }
 
     // ---------- RESULTS ----------

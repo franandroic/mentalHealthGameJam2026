@@ -60,10 +60,10 @@ public static class FishDatabase
 {
     public static readonly FishData BasicFish = new FishData(
         prefabVariantName: "BasicFish",
-        angerScore: 8,
+        angerScore: 0,
         disgustScore: 0,
         fearScore: 0,
-        happinessScore: 2,
+        happinessScore: 1,
         sadnessScore: 0,
         scale: new Vector3(1.5f, 1.5f, 1.5f),
         depth: 25f,
@@ -135,7 +135,7 @@ public static class FishDatabase
         angerScore: 2,
         disgustScore: 0,
         fearScore: 0,
-        happinessScore: 9,
+        happinessScore: 0,
         sadnessScore: 0,
         scale: new Vector3(0.5f, 0.5f, 0.5f),
         depth: 5f,

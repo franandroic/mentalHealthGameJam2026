@@ -375,7 +375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &217202358
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1237,48 +1237,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7919622008382117599, guid: 21ef50d2f6153fd4d8d0797ccc4a13b0, type: 3}
   m_PrefabInstance: {fileID: 1198101314564021913}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1221957990 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2182138570586866161, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
-  m_PrefabInstance: {fileID: 6650241803360287010}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1221957993 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7023984366606575285, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
-  m_PrefabInstance: {fileID: 6650241803360287010}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1221957994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221957990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 342e6440800cb894585f0dfa9f4570b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Fishing
-  throwDuration: 1
-  throwArcHeight: 2
-  fallingSpeed: 1
-  reelSpeed: 10
-  pullStrength: 0.2
-  pullStopRadius: 2
-  freeMoveSpeed: 4
-  freeMoveInertia: 0.2
-  caughtDuration: 5
-  caughtFishOffset: {x: 0, y: 0}
-  lineWidth: 0.03
-  lineColor: {r: 1, g: 1, b: 1, a: 1}
-  lineSortingOrder: 10
-  fishingLine: {fileID: 0}
-  hook: {fileID: 4546290168174826837, guid: a95902ca349d01442816de6372664b71, type: 3}
-  WaterSurface: {fileID: 1164906172}
-  BoatPos: {fileID: 1221957993}
-  cameraController: {fileID: 223701972}
-  fishSpawner: {fileID: 1527748248}
-  uiManager: {fileID: 650712051}
 --- !u!1 &1252235446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,6 +1596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameState
   clueText: {fileID: 1070591729}
+  feedbackText: {fileID: 1866773502}
   caughtFishImage1: {fileID: 601746362}
   caughtFishImage2: {fileID: 1336012709}
 --- !u!4 &1527748247
@@ -1669,7 +1628,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishSpawner
   fishVariants:
   - {fileID: 3816989216941542315, guid: 2c38a93e9b0c43e4b9306bc1535408b3, type: 3}
+  - {fileID: 1349435507958593458, guid: a8a12ca99288c794ea30f254b32d32bc, type: 3}
+  - {fileID: 2290466793246536006, guid: e0cefeb63dd4c6e4a9920cf03d044e54, type: 3}
+  - {fileID: 4858818232454348214, guid: 1c416e0aec67d5d4f9ae9719880281a8, type: 3}
+  - {fileID: 8095463153274738938, guid: 40d7831d777902d45bc8fc0cb70177b9, type: 3}
+  - {fileID: 7774303063588269106, guid: cb7a70e21c6fa574aab8ff4696ab8d93, type: 3}
   - {fileID: 2856722657922852787, guid: 6973b6a8e15d4734db8c2efd954cf277, type: 3}
+  - {fileID: 7304128441535593343, guid: 7fc4e883ab339d34eb78892265438e26, type: 3}
+  - {fileID: 4975834986721481887, guid: 84aab34cf8716a94f98e1856d67a8114, type: 3}
+  - {fileID: 325753166552348875, guid: b34f2865ebce3ec40a573ba86f8316a9, type: 3}
+  - {fileID: 12478363457542144, guid: 9c9a3e3f6058f7e4c897f11988046744, type: 3}
+  - {fileID: 6432603968284395359, guid: 623fb1aece448b84bbe7df71cb8af1a3, type: 3}
+  - {fileID: 1688740033035193052, guid: e84c36ca00ef67144a7a3a1eb6d7c489, type: 3}
+  - {fileID: 8526117337271950649, guid: 3f748adb2c2fbbf41bf16e104f0ef74b, type: 3}
+  - {fileID: 3138644715218062321, guid: e9c026f01208a9f4e97dc58565f2d9a5, type: 3}
+  - {fileID: 5005373497410363889, guid: 21276c0f30b7ebc4da268b27113afd52, type: 3}
+  - {fileID: 7218985422881857371, guid: 9cf9b756f63a6bb408848753a0af0109, type: 3}
   minFish: 5
   maxFish: 15
   fishZ: 0
@@ -2187,6 +2161,10 @@ PrefabInstance:
       value: Boat
       objectReference: {fileID: 0}
     - target: {fileID: 3388936578410882812, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 650712051}
+    - target: {fileID: 3388936578410882812, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
       propertyPath: fishSpawner
       value: 
       objectReference: {fileID: 1527748248}
@@ -2241,10 +2219,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2182138570586866161, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1221957994}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
