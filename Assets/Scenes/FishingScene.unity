@@ -1276,7 +1276,7 @@ MonoBehaviour:
   BoatPos: {fileID: 1221957993}
   cameraController: {fileID: 223701972}
   fishSpawner: {fileID: 1527748248}
-  uiManager: {fileID: 0}
+  uiManager: {fileID: 650712051}
 --- !u!1 &1252235446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,6 +1636,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameState
   clueText: {fileID: 1070591729}
+  caughtFishImage1: {fileID: 601746362}
+  caughtFishImage2: {fileID: 1336012709}
 --- !u!4 &1527748247
 Transform:
   m_ObjectHideFlags: 0
@@ -1963,7 +1965,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2182138570586866161, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1221957994}
   m_SourcePrefab: {fileID: 100100000, guid: 6c45e551b02bf9f40b12424a24c47ffd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
