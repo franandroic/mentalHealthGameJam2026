@@ -45,11 +45,11 @@ public static class TextRepository
     // ---------- FEEDBACK ----------
     public static class Feedback
     {
-        public const string VeryWrong = "No way!";
-        public const string Wrong = "Not quite.";
-        public const string Medium = "Neither here nor there.";
-        public const string QuiteRight = "Yeah, somewhat...";
-        public const string SpotOn = "Correct!";
+        public const string VeryWrong = "Big NO. Did you even look at it before reeling?";
+        public const string Wrong = "Weak match. This fish is out of touch.";
+        public const string Medium = "Half points. The vibe is watered down.";
+        public const string QuiteRight = "Pretty close! It's got the spirit, just needs coffee.";
+        public const string SpotOn = "Spot on! This fish is the CEO of that feeling.";
 
         public static string ForScore(int score)
         {
@@ -68,11 +68,11 @@ public static class TextRepository
     // ---------- RESULTS ----------
     public static class Results
     {
-        public const string BestAnger = "The anger king!";
-        public const string BestDisgust = "The disgust champion!";
-        public const string BestFear = "The fear GOAT!";
-        public const string BestHappiness = "The happiness legend!";
-        public const string BestSadness = "The sadness player!";
+        public const string BestAnger = "Congrats! You’re the Expert in Anger.";
+        public const string BestDisgust = "Congrats! You’re the Lord of Sadness.";
+        public const string BestFear = "Congrats! You’re the Lord of Disgust.";
+        public const string BestHappiness = "Congrats! You’re the Expert in Joy.";
+        public const string BestSadness = "Congrats! You’re the Master of Fear.";
 
         public static readonly string[] All = { BestAnger, BestDisgust, BestFear, BestHappiness, BestSadness };
     }
