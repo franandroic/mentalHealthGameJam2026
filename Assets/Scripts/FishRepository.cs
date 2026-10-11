@@ -70,6 +70,66 @@ public static class FishDatabase
         depthRange: 5f
         );
 
+    public static readonly FishData CloudFish = new FishData(
+        prefabVariantName: "CloudFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData CoralFish = new FishData(
+        prefabVariantName: "CoralFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData DemonFish = new FishData(
+        prefabVariantName: "DemonFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData ElectroFish = new FishData(
+        prefabVariantName: "ElectroFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData FroggyFish = new FishData(
+        prefabVariantName: "FroggyFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
     public static readonly FishData GreyFish = new FishData(
         prefabVariantName: "GreyFish",
         angerScore: 2,
@@ -80,6 +140,138 @@ public static class FishDatabase
         scale: new Vector3(0.5f, 0.5f, 0.5f),
         depth: 5f,
         depthRange: 5f
+        );
+
+    public static readonly FishData IceFish = new FishData(
+        prefabVariantName: "IceFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData MoustacheFish = new FishData(
+        prefabVariantName: "MoustacheFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData PufferFish = new FishData(
+        prefabVariantName: "PufferFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData RedFish = new FishData(
+        prefabVariantName: "RedFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData SharkFish = new FishData(
+        prefabVariantName: "SharkFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData ShrimpFish = new FishData(
+        prefabVariantName: "ShrimpFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData SpikeFish = new FishData(
+        prefabVariantName: "SpikeFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData TinyFish = new FishData(
+        prefabVariantName: "TinyFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData UglyFish = new FishData(
+        prefabVariantName: "UglyFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData WhaleFish = new FishData(
+        prefabVariantName: "WhaleFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
+        );
+
+    public static readonly FishData WhiteFish = new FishData(
+        prefabVariantName: "WhiteFish",
+        angerScore: 0,
+        disgustScore: 0,
+        fearScore: 0,
+        happinessScore: 0,
+        sadnessScore: 0,
+        scale: new Vector3(1f, 1f, 1f),
+        depth: 5f,
+        depthRange: 10f
         );
 
     // Every entry, for looping/filtering. Add new fish here too.

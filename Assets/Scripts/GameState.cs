@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameStateType
 {
@@ -21,6 +22,8 @@ public class GameState : MonoBehaviour
     public static GameState Instance { get; private set; }
     public GameStateType Current { get; private set; } = GameStateType.BeforeCast;
     [SerializeField] TMP_Text clueText;
+    [SerializeField] Image caughtFishImage1;
+    [SerializeField] Image caughtFishImage2;
 
     //Stores the fish on the hook. Null if fish not caught.
     public GameObject CaughtFish { get; private set; }
@@ -77,6 +80,25 @@ public class GameState : MonoBehaviour
         clueText.text = TextRepository.Clues.TextFor(picked);
     }
 
+    void ShowCaughtFishImage(GameObject fish)
+    {
+        if (caughtFishImage1 == null || caughtFishImage2 == null)
+        {
+            Debug.LogWarning("GameState: caughtFishImage is not assigned.", this);
+            return;
+        }
+
+        SpriteRenderer fishRenderer = fish.GetComponentInChildren<SpriteRenderer>();
+        if (fishRenderer == null)
+        {
+            Debug.LogWarning("GameState: caught fish has no SpriteRenderer.", fish);
+            return;
+        }
+
+        caughtFishImage1.sprite = fishRenderer.sprite;
+        caughtFishImage2.sprite = fishRenderer.sprite;
+    }
+
     // Looks up the caught fish's score for the current clue and logs it.
     void LogCaughtFishScore(GameObject fish)
     {
@@ -108,6 +130,7 @@ public class GameState : MonoBehaviour
         if (Current != GameStateType.InFreeMotion || fish == null) return;
         CaughtFish = fish;
         LogCaughtFishScore(fish);
+        ShowCaughtFishImage(fish);
         SetState(GameStateType.FishCaught);
     }
 
