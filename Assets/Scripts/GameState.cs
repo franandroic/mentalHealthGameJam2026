@@ -24,6 +24,7 @@ public class GameState : MonoBehaviour
     public static GameState Instance { get; private set; }
     public GameStateType Current { get; private set; } = GameStateType.BeforeCast;
     [SerializeField] TMP_Text clueText;
+    [SerializeField] TMP_Text feedbackText;
     [SerializeField] Image caughtFishImage1;
     [SerializeField] Image caughtFishImage2;
 
@@ -101,8 +102,17 @@ public class GameState : MonoBehaviour
         caughtFishImage2.sprite = fishRenderer.sprite;
     }
 
-    // Looks up the caught fish's score for the current clue and logs it.
-    void LogCaughtFishScore(GameObject fish)
+    void SetFeedback(string text)
+    {
+        if (feedbackText == null)
+        {
+            Debug.LogWarning("GameState: feedbackText is not assigned.", this);
+            return;
+        }
+        feedbackText.text = text;
+    }
+
+    void ShowFeedback(GameObject fish)
     {
         FishVariant variant = fish.GetComponentInParent<FishVariant>();
         if (variant == null)
@@ -119,19 +129,19 @@ public class GameState : MonoBehaviour
 
         if (CurrentClue == null)
         {
-            Debug.Log("Caught " + variant.VariantName + ", but there is no clue yet so it isn't scored.");
+            SetFeedback(string.Empty);   // no clue yet, so nothing to judge the fish against
             return;
         }
 
-        Emotion clue = CurrentClue.Value;
-        Debug.Log("Caught " + variant.VariantName + ": " + clue + " score = " + data.GetScore(clue));
+        int score = data.GetScore(CurrentClue.Value);
+        SetFeedback(TextRepository.Feedback.ForScore(score));
     }
 
     public void CatchFish(GameObject fish)
     {
         if (Current != GameStateType.InFreeMotion || fish == null) return;
         CaughtFish = fish;
-        LogCaughtFishScore(fish);
+        ShowFeedback(fish);
         ShowCaughtFishImage(fish);
         SetState(GameStateType.FishCaught);
     }
