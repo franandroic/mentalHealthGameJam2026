@@ -6,4 +6,9 @@ public class AnimationScript : MonoBehaviour
     {
         GameObject.Find("UIManager").GetComponent<UIAnimationManager>().DisableScroll();
     }
+
+    public void EnableTutorial()
+    {
+        GameObject.Find("GameManager").GetComponent<InputController>().isTutorialReady = true;
+    }
 }

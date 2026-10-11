@@ -9,6 +9,8 @@ public class InputController : MonoBehaviour
 
     public event Action OnClick;
 
+    [SerializeField] Animator rodTutorialAnimator;
+    public bool isTutorialReady = false;
     Camera cam;
 
     void Awake()
@@ -30,7 +32,18 @@ public class InputController : MonoBehaviour
     void Update()
     {
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+
             OnClick?.Invoke();
+            if (isTutorialReady)
+            {
+                rodTutorialAnimator.SetBool("Disappear", true);
+            }
+
+        }
+
+
+
     }
 
     public Vector3 MouseWorldPosition
