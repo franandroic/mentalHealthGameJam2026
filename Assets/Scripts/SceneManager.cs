@@ -1,9 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class SceneManager : MonoBehaviour
 {
-    private string endGameString = "";
+    private string endGameString = "Congratulations! You have completed the game!";
+
+    [SerializeField] TMP_Text endGameText;
+    [SerializeField] Animator endGameAnimator;
 
     // poziva se s Buttona (OnClick) - loada iducu scenu po redoslijedu iz Build Profiles / Build Settings
     // klasa se zove isto kao Unityjev SceneManager, zato se on poziva s punim imenom UnityEngine.SceneManagement.SceneManager
@@ -25,9 +30,25 @@ public class SceneManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void LoadMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
     public void EndGame()
     {
-        endGameString = BuildEndGameString();
+        string results = BuildEndGameString();
+        string text = string.IsNullOrEmpty(results) ? endGameString : endGameString + "\n" + results;
+        Debug.Log("EndGame: " + text);
+
+        if (endGameText == null)
+            Debug.LogWarning("SceneManager: endGameText is not assigned.", this);
+        else
+            endGameText.text = text;
+
+        if (endGameAnimator == null)
+            Debug.LogWarning("SceneManager: endGameAnimator is not assigned.", this);
+        else
+            endGameAnimator.SetBool("Start", true);
     }
 
     private string BuildEndGameString()
