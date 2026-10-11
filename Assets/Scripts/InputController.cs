@@ -9,6 +9,11 @@ public class InputController : MonoBehaviour
 
     public event Action OnClick;
 
+    [SerializeField] Animator rodTutorialAnimator;
+    [SerializeField] Animator plumetTutorialAnimator;
+    public bool isTutorialReady = false;
+    public bool PlumetTutorial = false;
+
     Camera cam;
 
     void Awake()
@@ -30,7 +35,23 @@ public class InputController : MonoBehaviour
     void Update()
     {
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-            OnClick?.Invoke();
+        {
+
+
+            if (isTutorialReady)
+            {
+                rodTutorialAnimator.SetBool("Disappear", true);
+                OnClick?.Invoke();
+                if (PlumetTutorial)
+                {
+                    plumetTutorialAnimator.SetBool("LeftClick", true);
+                }
+            }
+
+        }
+
+
+
     }
 
     public Vector3 MouseWorldPosition

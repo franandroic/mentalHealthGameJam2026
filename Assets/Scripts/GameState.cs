@@ -17,6 +17,8 @@ public enum GameStateType
 //Singleton that owns the current game state and the click-driven transitions.
 //Transitions that depend on world events (hook hits water, hook reaches boat)
 //are triggered by whoever detects them (Fishing) via SetState.
+
+
 public class GameState : MonoBehaviour
 {
     public static GameState Instance { get; private set; }
@@ -34,7 +36,7 @@ public class GameState : MonoBehaviour
 
     //Fired with the new state after every change.
     public event Action<GameStateType> OnStateChanged;
-
+    [SerializeField] Animator reelInanimator;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -63,7 +65,7 @@ public class GameState : MonoBehaviour
         Current = newState;
 
         if (newState == GameStateType.AfterReel) ShowRandomClue();
-
+        if (newState == GameStateType.FishCaught) reelInanimator.SetBool("Start", true);
         OnStateChanged?.Invoke(newState);
     }
 
@@ -160,11 +162,13 @@ public class GameState : MonoBehaviour
                 SetState(GameStateType.InFreeMotion);
                 break;
             case GameStateType.InFreeMotion:
-                //Fallthrough with caught fish at null
+            //Fallthrough with caught fish at null
             case GameStateType.FishCaught:
+
+
                 SetState(GameStateType.InReel);
                 break;
-            // InCast, InReel, AfterReel: clicks are ignored.
+                // InCast, InReel, AfterReel: clicks are ignored.
         }
     }
 }
