@@ -161,8 +161,8 @@ public class GameState : MonoBehaviour
             case GameStateType.InPlummet:
                 SetState(GameStateType.InFreeMotion);
                 break;
-            case GameStateType.InFreeMotion:
-            //Fallthrough with caught fish at null
+            //case GameStateType.InFreeMotion:
+                //Fallthrough with caught fish at null
             case GameStateType.FishCaught:
 
 

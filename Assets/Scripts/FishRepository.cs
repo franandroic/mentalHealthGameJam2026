@@ -70,7 +70,7 @@ public static class FishDatabase
         sadnessScore: 0,
         scale: new Vector3(1f, 1f, 1f),
         depth: 35f,
-        depthRange: 30f,
+        depthRange: 35f,
         spawnWeight: 100
         );
 
@@ -82,9 +82,9 @@ public static class FishDatabase
         happinessScore: 2,
         sadnessScore: 1,
         scale: new Vector3(1.5f, 1.5f, 1.5f),
-        depth: 10f,
-        depthRange: 20f,
-        spawnWeight: 20
+        depth: 15f,
+        depthRange: 10f,
+        spawnWeight: 8
         );
 
     public static readonly FishData CoralFish = new FishData(
@@ -95,9 +95,9 @@ public static class FishDatabase
         happinessScore: 0,
         sadnessScore: 0,
         scale: new Vector3(2f, 2f, 2f),
-        depth: 10f,
-        depthRange: 20f,
-        spawnWeight: 10
+        depth: 18f,
+        depthRange: 8f,
+        spawnWeight: 5
         );
 
     public static readonly FishData DemonFish = new FishData(
@@ -108,9 +108,9 @@ public static class FishDatabase
         happinessScore: 0,
         sadnessScore: 0,
         scale: new Vector3(1.6f, 1.6f, 1.6f),
-        depth: 50f,
-        depthRange: 20f,
-        spawnWeight: 10
+        depth: 55f,
+        depthRange: 8f,
+        spawnWeight: 3
         );
 
     public static readonly FishData ElectroFish = new FishData(
@@ -121,9 +121,9 @@ public static class FishDatabase
         happinessScore: 0,
         sadnessScore: 4,
         scale: new Vector3(1.5f, 1.5f, 1.5f),
-        depth: 30f,
-        depthRange: 10f,
-        spawnWeight: 10
+        depth: 32f,
+        depthRange: 6f,
+        spawnWeight: 3
         );
 
     public static readonly FishData FroggyFish = new FishData(
@@ -134,9 +134,9 @@ public static class FishDatabase
         happinessScore: 3,
         sadnessScore: 1,
         scale: new Vector3(1.3f, 1.3f, 1.3f),
-        depth: 40f,
-        depthRange: 15f,
-        spawnWeight: 30
+        depth: 42f,
+        depthRange: 10f,
+        spawnWeight: 5
         );
 
     public static readonly FishData GreyFish = new FishData(
@@ -147,9 +147,9 @@ public static class FishDatabase
         happinessScore: 0,
         sadnessScore: 2,
         scale: new Vector3(2f, 2f, 2f),
-        depth: 5f,
-        depthRange: 5f,
-        spawnWeight: 20
+        depth: 8f,
+        depthRange: 6f,
+        spawnWeight: 8
         );
 
     public static readonly FishData IceFish = new FishData(
@@ -160,9 +160,9 @@ public static class FishDatabase
         happinessScore: 5,
         sadnessScore: 0,
         scale: new Vector3(1.6f, 1.6f, 1.6f),
-        depth: 50f,
-        depthRange: 10f,
-        spawnWeight: 10
+        depth: 52f,
+        depthRange: 6f,
+        spawnWeight: 2
         );
 
     public static readonly FishData MoustacheFish = new FishData(
@@ -173,9 +173,9 @@ public static class FishDatabase
         happinessScore: 1,
         sadnessScore: 0,
         scale: new Vector3(1.1f, 1.1f, 1.1f),
-        depth: 60f,
-        depthRange: 30f,
-        spawnWeight: 20
+        depth: 58f,
+        depthRange: 12f,
+        spawnWeight: 5
         );
 
     public static readonly FishData PufferFish = new FishData(
@@ -186,9 +186,9 @@ public static class FishDatabase
         happinessScore: 0,
         sadnessScore: 3,
         scale: new Vector3(2f, 2f, 2f),
-        depth: 60f,
-        depthRange: 10f,
-        spawnWeight: 20
+        depth: 62f,
+        depthRange: 6f,
+        spawnWeight: 3
         );
 
     public static readonly FishData RedFish = new FishData(
@@ -199,9 +199,9 @@ public static class FishDatabase
         happinessScore: 0,
         sadnessScore: 5,
         scale: new Vector3(2f, 2f, 2f),
-        depth: 65f,
-        depthRange: 10f,
-        spawnWeight: 20
+        depth: 67f,
+        depthRange: 3f,
+        spawnWeight: 2
         );
 
     public static readonly FishData SharkFish = new FishData(
@@ -212,9 +212,9 @@ public static class FishDatabase
         happinessScore: 0,
         sadnessScore: 2,
         scale: new Vector3(1.4f, 1.4f, 1.4f),
-        depth: 25f,
-        depthRange: 15f,
-        spawnWeight: 20
+        depth: 28f,
+        depthRange: 8f,
+        spawnWeight: 4
         );
 
     public static readonly FishData ShrimpFish = new FishData(
@@ -225,9 +225,9 @@ public static class FishDatabase
         happinessScore: 0,
         sadnessScore: 0,
         scale: new Vector3(1.4f, 1.4f, 1.4f),
-        depth: 30f,
-        depthRange: 10f,
-        spawnWeight: 10
+        depth: 34f,
+        depthRange: 6f,
+        spawnWeight: 2
         );
 
     public static readonly FishData SpikeFish = new FishData(
@@ -238,9 +238,9 @@ public static class FishDatabase
         happinessScore: 0,
         sadnessScore: 0,
         scale: new Vector3(1.2f, 1.2f, 1.2f),
-        depth: 40f,
-        depthRange: 20f,
-        spawnWeight: 10
+        depth: 45f,
+        depthRange: 10f,
+        spawnWeight: 4
         );
 
     public static readonly FishData TinyFish = new FishData(
@@ -251,9 +251,9 @@ public static class FishDatabase
         happinessScore: 0,
         sadnessScore: 1,
         scale: new Vector3(1.1f, 1.1f, 1.1f),
-        depth: 40f,
-        depthRange: 20f,
-        spawnWeight: 50
+        depth: 38f,
+        depthRange: 12f,
+        spawnWeight: 8
         );
 
     public static readonly FishData UglyFish = new FishData(
@@ -264,9 +264,9 @@ public static class FishDatabase
         happinessScore: 0,
         sadnessScore: 2,
         scale: new Vector3(2f, 2f, 2f),
-        depth: 60f,
-        depthRange: 10f,
-        spawnWeight: 10
+        depth: 64f,
+        depthRange: 5f,
+        spawnWeight: 2
         );
 
     public static readonly FishData WhaleFish = new FishData(
@@ -277,9 +277,9 @@ public static class FishDatabase
         happinessScore: 4,
         sadnessScore: 2,
         scale: new Vector3(5f, 5f, 5f),
-        depth: 5f,
-        depthRange: 35f,
-        spawnWeight: 5
+        depth: 20f,
+        depthRange: 15f,
+        spawnWeight: 1
         );
 
     public static readonly FishData WhiteFish = new FishData(
@@ -290,9 +290,9 @@ public static class FishDatabase
         happinessScore: 4,
         sadnessScore: 0,
         scale: new Vector3(1.5f, 1.5f, 1.5f),
-        depth: 20f,
-        depthRange: 30f,
-        spawnWeight: 10
+        depth: 22f,
+        depthRange: 12f,
+        spawnWeight: 5
         );
 
     // Every entry, for looping/filtering. Add new fish here too.
