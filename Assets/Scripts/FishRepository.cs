@@ -232,7 +232,7 @@ public static class FishDatabase
 
     public static readonly FishData SpikeFish = new FishData(
         prefabVariantName: "SpikeFish",
-        angerScore: 3,
+        angerScore: 5,
         disgustScore: 1,
         fearScore: 4,
         happinessScore: 0,

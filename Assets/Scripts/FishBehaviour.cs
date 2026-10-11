@@ -6,9 +6,11 @@ public class FishBehaviour : MonoBehaviour
     private Transform edgeRight;
     private Transform edgeLeft;
     private Transform edgeTop;
+    private Transform hook;
     private float distanceSideError = 0.2f;
     private float distanceTopError = 1f;
     public float distanceTargetError = 0.05f;
+    public float hookAvoidRadius = 2.0f;
 
     // stanja: true od trenutka okretanja dok riba ne dodje do iduce target pozicije,
     // da se ne bi okretala svaki frame dok je jos uvijek blizu ruba
@@ -39,6 +41,10 @@ public class FishBehaviour : MonoBehaviour
         edgeRight = GameObject.Find("EdgeRight").transform;
         edgeLeft = GameObject.Find("EdgeLeft").transform;
         edgeTop = GameObject.Find("WaterSurface").transform;
+
+        HookBehaviour hookComponent = FindAnyObjectByType<HookBehaviour>();
+        if (hookComponent != null) hook = hookComponent.transform;
+
         Swim();
     }
 
@@ -123,8 +129,25 @@ public class FishBehaviour : MonoBehaviour
         Visuals.transform.localScale = scale;
     }
 
+    private void TurnAwayFromHook()
+    {
+        if (hook == null) return;
+
+        Vector3 pos = transform.position;
+        if (Vector2.Distance(pos, hook.position) > hookAvoidRadius) return;
+
+        bool hookOnRight = hook.position.x > pos.x;
+        bool headingToHook = hookOnRight ? destination.x > pos.x : destination.x < pos.x;
+        if (!headingToHook) return;
+
+        TurnAround();
+        destination.x = 2f * pos.x - destination.x;
+    }
+
     void Update()
     {
+        TurnAwayFromHook();
+
         bool movingRight = destination.x > transform.position.x;
         bool movingLeft = destination.x < transform.position.x;
 

@@ -527,6 +527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishBehaviour
   distanceTargetError: 0.15
+  hookAvoidRadius: 3
   Visuals: {fileID: 4398714538960057529}
   CalmSwimPattern: {fileID: 4467447805192059287}
   ChaoticSwimPattern: {fileID: 4315150621708247356}
@@ -534,7 +535,7 @@ MonoBehaviour:
   BottomSwimPattern: {fileID: 7181399821692089865}
   swimPattern: 0
   turnsAroundRandomly: 0
-  speed: 0.5
+  speed: 0.25
 --- !u!61 &-3349813231271269722
 BoxCollider2D:
   m_ObjectHideFlags: 0

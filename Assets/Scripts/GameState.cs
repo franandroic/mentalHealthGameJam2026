@@ -34,6 +34,12 @@ public class GameState : MonoBehaviour
     //The emotion of the latest clue. Null until the first clue has been shown (first AfterReel)
     public Emotion? CurrentClue { get; private set; }
 
+    public bool SpikeFishCaught { get; private set; }   // anger 5
+    public bool IceFishCaught { get; private set; }      // happiness 5
+    public bool RedFishCaught { get; private set; }      // sadness 5
+    public bool ShrimpFishCaught { get; private set; }   // fear 5
+    public bool UglyFishCaught { get; private set; }     // disgust 5
+
     //Fired with the new state after every change.
     public event Action<GameStateType> OnStateChanged;
     [SerializeField] Animator reelInanimator;
@@ -64,7 +70,11 @@ public class GameState : MonoBehaviour
         if (newState == Current) return;
         Current = newState;
 
-        if (newState == GameStateType.AfterReel) ShowRandomClue();
+        if (newState == GameStateType.AfterReel)
+        {
+            ShowRandomClue();
+            MarkRareFishCaught();
+        }
         if (newState == GameStateType.FishCaught) reelInanimator.SetBool("Start", true);
         OnStateChanged?.Invoke(newState);
     }
@@ -100,6 +110,21 @@ public class GameState : MonoBehaviour
 
         caughtFishImage1.sprite = fishRenderer.sprite;
         caughtFishImage2.sprite = fishRenderer.sprite;
+    }
+
+    void MarkRareFishCaught()
+    {
+        if (CaughtFish == null) return;
+
+        FishVariant variant = CaughtFish.GetComponentInParent<FishVariant>();
+        if (variant == null) return;
+
+        string name = variant.VariantName;
+        if (name == FishDatabase.SpikeFish.PrefabVariantName) SpikeFishCaught = true;
+        else if (name == FishDatabase.IceFish.PrefabVariantName) IceFishCaught = true;
+        else if (name == FishDatabase.RedFish.PrefabVariantName) RedFishCaught = true;
+        else if (name == FishDatabase.ShrimpFish.PrefabVariantName) ShrimpFishCaught = true;
+        else if (name == FishDatabase.UglyFish.PrefabVariantName) UglyFishCaught = true;
     }
 
     void SetFeedback(string text)
